@@ -1,0 +1,73 @@
+git -C ~ clone https://github.com/GoogleCloudPlatform/training-data-analyst
+
+export DP_STORAGE="gs://$(gcloud dataproc clusters describe sparktodp --region=us-central1 --format=json | jq -r '.config.configBucket')"
+
+gsutil -m cp ~/training-data-analyst/quests/sparktobq/*.ipynb $DP_STORAGE/notebooks/jupyter
+
+export PROJECT_ID=$(gcloud info --format='value(config.project)')
+gsutil mb gs://$PROJECT_ID
+
+wget http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz
+gsutil cp kddcup.data_10_percent.gz gs://$PROJECT_ID/
+
+from pyspark.sql import SparkSession, SQLContext, Row
+
+gcs_bucket='qwiklabs-gcp-01-3e35084f028c'
+spark = SparkSession.builder.appName("kdd").getOrCreate()
+sc = spark.sparkContext
+data_file = "gs://"+gcs_bucket+"//kddcup.data_10_percent.gz"
+raw_rdd = sc.textFile(data_file).cache()
+raw_rdd.take(5)
+
+%%writefile spark_analysis.py
+
+import matplotlib
+matplotlib.use('agg')
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--bucket", help="bucket for input and output")
+args = parser.parse_args()
+
+BUCKET = args.bucket
+
+%%writefile -a spark_analysis.py
+
+ax[0].get_figure().savefig('report.png');
+
+%%writefile -a spark_analysis.py
+
+import google.cloud.storage as gcs
+bucket = gcs.Client().get_bucket(BUCKET)
+for blob in bucket.list_blobs(prefix='sparktodp/'):
+    blob.delete()
+bucket.blob('sparktodp/report.png').upload_from_filename('report.png')
+
+%%writefile -a spark_analysis.py
+
+connections_by_protocol.write.format("csv").mode("overwrite").save(
+    "gs://{}/sparktodp/connections_by_protocol".format(BUCKET))
+
+BUCKET_list = !gcloud info --format='value(config.project)'
+BUCKET=BUCKET_list[0]
+print('Writing to {}'.format(BUCKET))
+!/opt/conda/anaconda/bin/python spark_analysis.py --bucket=$BUCKET
+
+!gsutil ls gs://$BUCKET/sparktodp/**
+
+!gsutil cp spark_analysis.py gs://$BUCKET/sparktodp/spark_analysis.py
+
+gsutil cp gs://$PROJECT_ID/sparktodp/spark_analysis.py spark_analysis.py
+
+nano submit_onejob.sh
+
+#!/bin/bash
+gcloud dataproc jobs submit pyspark \
+       --cluster sparktodp \
+       --region us-central1 \
+       spark_analysis.py \
+       -- --bucket=$1
+
+chmod +x submit_onejob.sh
+
+./submit_onejob.sh $PROJECT_ID
