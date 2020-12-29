@@ -1,0 +1,5 @@
+git clone https://github.com/GoogleCloudPlatform/python-docs-samples
+
+cd python-docs-samples/composer/workflows
+
+gsutil cp hadoop_tutorial.py gs://us-central1-highcpu-9c7dee49-bucket/dags
