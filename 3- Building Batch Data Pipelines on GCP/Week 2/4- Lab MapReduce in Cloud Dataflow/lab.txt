@@ -1,0 +1,15 @@
+BUCKET=$GOOGLE_CLOUD_PROJECT
+
+gsutil mb gs://$BUCKET
+
+git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+
+gsutil cp is_popular.py gs://$BUCKET/
+
+python3 ./is_popular.py
+
+ls -al /tmp
+
+cat /tmp/output-*
+
+python3 ./is_popular.py --output_prefix=/tmp/myoutput
