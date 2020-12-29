@@ -1,0 +1,13 @@
+cd ~/training-data-analyst/courses/data_analysis/lab2/python
+sudo ./install_packages.sh
+
+SELECT
+  content
+FROM
+  `fh-bigquery.github_extracts.contents_java_2016`
+LIMIT
+  10
+
+python3 JavaProjectsThatNeedHelp.py --bucket $BUCKET --project $DEVSHELL_PROJECT_ID --DirectRunner
+
+python3 JavaProjectsThatNeedHelp.py --bucket $BUCKET --project $DEVSHELL_PROJECT_ID --DataFlowRunner
