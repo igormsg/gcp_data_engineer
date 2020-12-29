@@ -1,0 +1,26 @@
+git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+
+export BUCKET=$GOOGLE_CLOUD_PROJECT
+
+gsutil mb gs://$BUCKET
+
+cd ~/training-data-analyst/courses/data_analysis/lab2/python
+
+sudo ./install_packages.sh
+
+pip3 -V
+
+cd ~/training-data-analyst/courses/data_analysis/lab2/python
+nano grep.py
+
+cd ~/training-data-analyst/courses/data_analysis/lab2/python
+
+python3 grep.py
+
+ls -al /tmp
+
+cat /tmp/output-*
+
+gsutil cp ../javahelp/src/main/java/com/google/cloud/training/dataanalyst/javahelp/*.java gs://$BUCKET/javahelp
+
+python3 grepc.py
