@@ -1,0 +1,10 @@
+ls /training
+
+git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+
+source /training/project_env.sh
+
+SELECT max(speed) as maxspeed, min(speed) as minspeed,
+avg(speed) as avgspeed, highway
+FROM `qwiklabs-gcp-01-d62470211371.demos.current_conditions`
+group by highway
