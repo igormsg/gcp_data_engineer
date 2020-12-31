@@ -1,0 +1,109 @@
+Know the differences between Cloud SQL and Cloud Spanner, and when to use each. Service differentiators include access methods, the cost or speed of specific actions, sizes of data and how data is organized and stored
+
+know how to identify technologies backwards from their properties. For example, which data technology offers the fastest ingest of data? Which one might you use for ingest of streaming data?
+
+managed services still have some IT overhead. It doesn't completely eliminate the overhead or manual procedures, but it minimizes them compared with on prem solutions. Serverless services remove more of the IT responsibility.
+
+is to understand the array of machine learning technologies offered on GCP and when you might want to use each.
+
+Your exam tip here is to familiarize yourself with infrastructure services that show up commonly and data engineering solutions. Often they're employed because of key features they provide. For example, Cloud PubSub can hold a message for up to seven days
+
+that it's good to know how data is stored and what purpose or use case is the storage or database optimized for. Flat serialized data is easy to work with, but it lacks structure and therefore meaning. If you want to represent data that has meaningful relationships, you need a method that not only represents the data but also the relationships.
+
+know the hierarchy of objects within a data technology and how they relate to one another.
+
+you should know how different services store data on how each method is optimised for specific use cases as previously mentioned, but also understand the key value of the approach and this case RDDs hide complexity and allow spark to make decisions on your behalf.There are a number of concepts that you should know about Cloud Dataflow.
+
+spark is important because it does part of its pipeline processing in memory rather than copying from disk.
+
+If the situation you're analyzing has data and BigQuery, and perhaps the business logic is better expressed in terms of functional code rather than SQL, you may want to run a spark job on the data. Cloud dataproc has connectors to all kinds of GCP resources. You can read from GCP sources and write to GCP sources and use cloud dataproc as the interconnecting glue.
+
+about modifying the cloud data prop cluster if you need to modify the cluster, consider whether you have the right data processing solution. There are so many services available on Google Cloud, you might be able to use. 
+
+Cloud Dataflow users use roles to limit access to only Dataflow resources not just the project.
+
+A pipeline is a more maintainable way to organize Data Processing code than for example, an application running on it instance
+
+Dataflow Templates open up new options for separation of work, and that means, better security and resource accountability.
+
+access control, and Bigquery is at the project and the data set level. 
+
+Here's a major design tip. Separate compute and processing from storage and database enables serverless
+
+think about data in terms of the three V's volume, velocity and variety. How much, how often and how consistent. This will guide you to the best approach for ingesting the data. In brief, use GSU till for uploading files. Use the Storage transfer service when the data is in another location, such as another cloud, and use the transfer appliance when the data is too big to transfer electronically.
+
+You need to know how long cloud pub/sub holds messages. It's up to seven days.
+
+ This is the pattern you'll often see. Cloud pub/sub for data ingest, cloud dataflow for data processing and ETL, and BigQuery for interactive analysis. Exam tip, be able to recognize this pattern in case scenarios.
+
+Tip: Be familiar with the common use cases and qualities of the different storage options. Each storage
+system or database is optimized for different things -- some are best at atomically updating the data for
+transactions. Some are optimized for speed of data retrieval but not for updates or changes. Some are
+very fast and inexpensive for simple retrieval but slow for complex queries.
+
+Tip: An important element in designing the data processing pipeline starts with selecting the appropriate
+service or collection of services.
+
+Tip: AI Platform Notebooks, Google Data Studio, BigQuery all have interactive interfaces. Do you know
+when to use each?
+
+ Pub/Sub and Dataflow together provide once, in-order, processing of possibly delayed or repeated
+streaming data.
+
+Be familiar with the common assemblies of services and how they are often used together: Dataflow,
+Dataproc, BigQuery, Cloud Storage, and Pub/Sub
+
+Tip: Technologically, Dataproc is superior to Open Source Hadoop, and Dataflow is superior to Dataproc.
+However, this does not mean that the most advanced technology is always the best solution. You need to
+consider the business requirements. The client might want to first migrate from the data center to the
+cloud. Make sure everything is working (validate it). And only after they are confident with that solution, to
+consider improving or modernizing.
+
+Study ACID vs BASE!!!!!
+
+Cloud Spanner is strongly typed and globally consistent. The two characteristics that distinguish it from Cloud SQL, are global consistent transactions and size. Cloud Spanner can work with much larger databases than Cloud SQL. Cloud SQL is fine if you can get by with a single database, but if your needs are such that you need multiple databases, Cloud Spanner is a great choice.
+
+Example, if the exam question contains Data Warehouse, you should be thinking BigQuery as a candidate. If the case says something about large media files, you should immediately be thinking Cloud Storage.
+
+data flow - window (fix, slide, session) and side inputs!
+
+streaming pub/sub=>big query - 100k rows/table/sec. but might deliver the messages out of order. If you have a timestamp then Cloud data flow can remove duplicates and work out the order of messages. BigQuery is an inexpensive data store for tabular data. It's cost comparable with Cloud storage, so it makes sense to ingest into BigQuery and leave the data there.
+
+Why Big-table and not Cloud Spanner, cost? Note that we can support a 100,000 queries per second with ten nodes and Big-table, but we would need about a 150 nodes in Cloud Spanner.
+
+
+storage:
+Data management is often influenced by business requirements. After the data has been used for the
+"live" application, is it collected for reporting, for backup and recovery, for audits, or for legal compliance?
+What are the changing business purposes of the data in different time frames?
+
+"Effective use of managed services" … choose the right service and the correct settings/features for
+specific use cases.
+
+● Cloud Bigtable
+● Cloud Spanner
+● Cloud SQL
+● BigQuery
+● Cloud Storage
+● Datastore
+● Cloud Memorystore
+
+pipeline:
+What is Data cleansing? Data cleansing is improving the data quality through consistency. You could
+use Dataprep to Extract, Transform, or Load (ETL). You could run a data transformation job on Dataproc.
+
+Batch and streaming together? You should already be thinking "Dataflow"
+
+Integrating with new data sources. You should be familiar with the connectors available between
+services in the cloud, and common import/acquisition configurations.
+
+Processing Infrastructure:
+Testing and quality control and monitoring. You should be familiar with the common approaches to
+testing that are used in production environments, such as A/B testing, and other rollout scenarios.
+Likewise, there are operational and administrative monitoring elements for most services in the Cloud
+Console, and statistical and log monitoring in Cloud Logging. Do you know how to enable and use Google
+Cloud’s operations suite with common services?
+
+
+
+

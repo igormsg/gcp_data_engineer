@@ -1,0 +1,34 @@
+SELECT
+  airline,
+  destination,
+  AVG(duration)
+FROM
+  qwiklabs-gcp-04-f56c5f7225f1.JasmineJasper.triplog
+WHERE
+  origin = 'LHR'
+GROUP BY
+  airline,
+  destination
+
+
+select TIME_DIFF(PARSE_TIME("%H:%M", duration), TIME "00:00:00", MINUTE) as duration_minutes from qwiklabs-gcp-04-f56c5f7225f1.JasmineJasper.triplog
+group by duration
+order by duration DESC
+
+
+SELECT airline, avg(minutes) as avg_minutes FROM `qwiklabs-gcp-04-f56c5f7225f1.JasmineJasper.triplog` 
+where 
+origin = 'FRA'
+and 
+destination = 'KUL'
+group by airline
+order by avg_minutes asc
+
+SELECT airline, avg(minutes) as avg_minutes FROM `qwiklabs-gcp-04-f56c5f7225f1.JasmineJasper.triplog` 
+where 
+origin = 'LHR'
+and 
+destination = 'KUL'
+group by airline
+order by avg_minutes asc
+
