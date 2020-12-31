@@ -104,6 +104,59 @@ Likewise, there are operational and administrative monitoring elements for most 
 Console, and statistical and log monitoring in Cloud Logging. Do you know how to enable and use Google
 Cloud’s operations suite with common services?
 
+For example, what are the three modes of the Natural Language API? The answer is sentiment analysis, entities, and syntax. 
 
+This is the pattern for developing your own machine learning models. First, prepare the data. That means you gather the training data, clean the data, split it into pools or groups for different purposes. Then you select features and improve them with feature engineering next or the training data in an online location. That cloud machine learning engine can access, such as in cloud storage. Then you follow these steps. You use tensor flow to create the training application. You package it and then you can figure and start a cloud mill job.
 
+One of the basic concepts of machine learning is correctable error. If you can make a guess about something like a value or a state, and if you know whether that guess was right or not.
 
+Concepts like fast failure lifecycle and iterations become important in developing and refining a model.
+
+study tensor flow!
+
+mean square error
+
+gradient descent is used to find the best parameters
+
+RMSE??
+
+classification error measure is cross entropy
+
+You can use the evaluation dataset to determine if the model parameters are leading to overfitting. Overfitting, or memorizing your training dataset can be far worse than having a model that only adequately fits your data.
+
+if the question says data is scarce, then you should be thinking independent test data or cross-validate our candidate answers.
+
+To recap, you need to know regression and classification, labels, features, you need to know the progression of train, evaluate, and predict, and you need to understand some basic TensorFlow API course.
+
+Tensor Flow estimator API?
+
+study Kubeflow and AI Platform
+
+Edge computing is the design of distributing processing in a strategic way so that model processing
+is pushed closer to the inputs. For example, in IoT, doing Machine Learning processing closer to the IoT
+sensors, by performing work in nearby datacenters or regions, is 'edge computing'.
+
+unsupervised learning: neural networks, clustering, etc
+
+In this example, a confusion matrix is used to make the data engineering choices understandable to the business users. So your exam tip is use a confusion matrix to describe the performance of classification models.
+
+build (own model), buy (pre trained) or modify (auto ml)
+
+Your exam tip. Consider using data where it is in place, maybe from cloud storage rather than using extract transform, load ETL.
+
+Your exam tip grouping the work can be efficient and give additional control over the processing of the data. Don't get confused between initial proof of concept and production activities in general
+
+Cases will refer to real world situations and your exam tip is to identify toy solutions. And distinguish them from real production solutions.
+
+Your exam tip is better know about learning rate and hyperparameter tuning in machine learning. Performance is critical to practical solutions
+
+Input data and data sources, I/O, how many bytes does your query read? Communication between nodes, shuffling, how many bytes does your query pass to the next stage? How many bytes does your query pass to each slot? Computation, how much CPU work does your query require? Outputs, also called materialization, how many bytes does your query write? Query anti-patterns, are your queries following SQL best practices.
+
+know and understand normalization and denormalization and when to apply each to your data representation and design
+
+Exam tip is to be suspicious of anything with ''Select All'' you need to understand the use of wildcards. 
+
+Business Requirements
+Technical Requirements
+Technical Watchpoints (requirements or facts that indicate elements of a solution)
+Proposed Solution
