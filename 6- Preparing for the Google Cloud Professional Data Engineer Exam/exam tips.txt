@@ -160,3 +160,67 @@ Business Requirements
 Technical Requirements
 Technical Watchpoints (requirements or facts that indicate elements of a solution)
 Proposed Solution
+
+What if the policy on the resource only gives access to a single, lets say Cloud Storage Bucket, and restricts access to all other buckets? However, at the project level, a rule exist that grants access to all buckets in the project. Which rule wins? The more restrictive rule on the resource or the more general rule on the project. If the parent policy is less restrictive, it overrides a more restrictive resource policy. So in this case, the project policy wins.
+
+cache big query:
+exhibit non-deterministic behavior (for example, they use CURRENT_TIMESTAMP or RAND), 
+if the table or view being queried has changed (even if the columns/rows of interest to the query are unchanged), 
+if the table is associated with a streaming buffer (even if there are no new rows), 
+if the query uses DML statements, or queries external data sources.
+
+ST big query - spatial type
+
+apache beam - combine ao inves de groupbykey
+
+valid - muito nulos
+consistency - valores duplicados
+accuracy - joins errado, check com subtotal preco * qtd
+complete - gaps nos datas, faltando um periodo por ex
+uniform - mesma coluna com unidades diferentes
+
+sql - row/record based storage
+big query - column based storage
+
+federated query
+
+stack driver e tensorboardo to monitoring
+
+It would be a good idea to make sure you know the main troubleshooting methods for each data engineering technology and service security and troubleshooting are the lateral subjects that crowd across all technologies
+
+IAM -- Understand permissions and custom roles. Under what conditions are custom roles preferred
+over standard predefined roles?
+
+A lot of administration over resources is presented in the console. But a lot of runtime information
+such as logs, performance, and so forth is presented and reported in Cloud Monitoring and Cloud
+Logging. The tools within Google Cloud's operations suite provide information for troubleshooting both
+functional and performance issues.
+
+Establishing standard data quality at ingress using Dataprep by Trifacta or by running an ETL pipeline
+can prevent many problems later in processing that would be difficult to troubleshoot.
+
+Keep in mind the business purpose of the data processing. How resilient does the application need
+to be? For example, financial transactions usually cannot be dropped and must not be duplicated. But a
+statistical analysis might be equally valid if a small amount of data is lost. These assumptions influence
+the approach to rerunning failed jobs.
+
+Where is the official authoritative data (sometimes called the source of truth) and where are the
+replicas? How frequently does data need to be shared or updated? Can smaller parts of the data be
+synchronized to reduce costs?
+
+Where is the data stored? Where is the data going to be processed? Can data storage and data
+processing be in locations near one another?
+
+When will the data need to be exported? How difficult and expensive will it be to make this happen?
+For example, you might want to store data in a different location or in a different type of storage to meet
+business requirements for portability.
+
+Transfer Appliance
+
+Storage Transfer Service
+
+IOT Core
+
+
+Partner Interconnect
+
