@@ -224,3 +224,9 @@ IOT Core
 
 Partner Interconnect
 
+Cloud Speech-to-Text API, and send requests in an asynchronous mode.
+
+Use a row key of the form <sensorid>#<timestamp>. - hotspotting
+
+If you thoroughly understand the ‘How-to’ and ‘Concepts‘ sections of Google Cloud documentation, you easily have 70% of what it takes to clear GCP certification
+
