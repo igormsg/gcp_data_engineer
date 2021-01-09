@@ -230,3 +230,66 @@ Use a row key of the form <sensorid>#<timestamp>. - hotspotting
 
 If you thoroughly understand the ‘How-to’ and ‘Concepts‘ sections of Google Cloud documentation, you easily have 70% of what it takes to clear GCP certification
 
+
+-------------------
+Google Cloud Storage
+-------------------
+
+#0 is a special identifier for the most recent version of an object. #0 is useful to add when the name of the object ends in a string that would otherwise be interpreted as a generation number.
+
+Geo-redundancy ensures maximum availability of your data, even in the event of large-scale disruptions, such as natural disasters. For dual-regions, geo-redundancy is achieved using two specific regions. For multi-regions, geo-redundancy is achieved using any combination of data centers within the specified multi-region, which may include data centers that are not explicitly listed as available regions.
+
+Objects are immutable, which means that an uploaded object cannot change throughout its storage lifetime
+
+Updating the same object more frequently than once per second may result in 429 Too Many Requests errors.
+
+The following command synchronizes data between an Amazon S3 bucket and a Cloud Storage bucket:
+gsutil rsync -d -r s3://my-aws-bucket gs://example-bucket
+
+Cloud Storage is a multi-tenant service, meaning that users share the same set of underlying resources. 
+Approximately 1000 object write requests per second, which includes uploading, updating, and deleting objects.
+Approximately 5000 object read requests per second, which includes listing objects, reading object data, and reading object metadata.
+
+As a bucket approaches its IO capacity limit, Cloud Storage typically takes on the order of minutes to detect and accordingly redistribute the load across more servers. Consequently, if the request rate on your bucket increases faster than Cloud Storage can perform this redistribution, you may run into temporary limits, specifically higher latency and error rates. 
+
+In order to maintain a high request rate, avoid using sequential names. Using completely random object names will give you the best load distribution.
+
+In order to be eligible for decompressive transcoding, an object must meet two criteria:
+The file is gzip-compressed when stored in Cloud Storage.
+The associated metadata includes Content-Encoding: gzip.
+
+While decompressive transcoding allows objects to be stored in Cloud Storage in a compressed state, saving space and costs, charges for downloading the object are based on its decompressed size, because that is the size of the served object. For more information, see the pricing guide.
+
+To prevent the above situation from occurring, you should begin by getting the metadata for file.txt in order to determine its current generation. You then send the delete request with an if-generation-match precondition that uses the generation number. Using the precondition ensures that only the object with that specific generation number gets deleted, regardless of when the delete request reaches Cloud Storage or how many times the delete request with the precondition is sent. With the if-generation-match precondition, any unintended attempts to mutate a different generation of file.txt fail with the response code 412 Precondition Failed.
+
+Important: Cached objects that are publicly readable might not exhibit strong consistency. See Cache control and consistency for details.
+
+The following operations are eventually consistent: Granting access to or revoking access from resources.
+
+The Cloud Storage access control system includes the ability to specify that objects are publicly readable. Make sure you intend for any objects you write with this permission to be public. Once "published", data on the Internet can be copied to many places, so it's effectively impossible to regain read control over an object written with this permission.
+
+If you need to make content available securely to users who don't have Google accounts we recommend you use signed URLs. For example, with signed URLs you can provide a link to an object and your application's customers do not need to authenticate with Cloud Storage to access the object. When you create a signed URL you control the type (read, write, delete) and duration of access.
+
+If you use Compute Engine instances with processes that POST to Cloud Storage to initiate a resumable upload, then you should use Compute Engine instances in the same locations as your Cloud Storage buckets. You can then use a geo IP service to pick the Compute Engine region to which you route customer requests, which helps keep traffic localized to a geo-region.
+
+A retention policy that specifies a retention period can be placed on a bucket. An object in the bucket cannot be deleted or replaced until it reaches the specified age.
+
+Caution: Object Versioning does not protect your data if you delete the entire bucket.
+
+If not otherwise specified in your request, buckets are created in the US multi-region and have a default storage class of Standard Storage.
+
+You cannot change the name of an existing bucket. Instead, you should create a new bucket with the desired name and move the contents from the old bucket to the new bucket. See Moving and Renaming Buckets for a step-by-step guide.
+
+Unlike the "coldest" storage services offered by other Cloud providers, your data is available within milliseconds, not hours or days.
+
+Operations that have both a source bucket and a destination bucket, such as a copy or rewrite, charge to the project that contains the source bucket
+
+The mutability of metadata varies: some metadata you can edit at any time, some metadata you can only set at the time the object is created, and some metadata you can only view. For example, you can edit the value of the Cache-Control metadata at any time, but you can only assign the storageClass metadata when the object is created or rewritten, and you cannot directly edit the value for the generation metadata, though the generation value changes when the object is replaced.
+
+Once you enable uniform bucket-level access, you have 90 days to switch back to fine-grained access before uniform bucket-level access becomes permanent.
+
+
+neural networks
+wide - many features - memory
+tall/deep - many layers - generalization
+wide and tall - recomend systems
